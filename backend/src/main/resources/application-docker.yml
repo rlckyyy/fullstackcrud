@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: postgres
+    password: rr
+    url: jdbc:postgresql://relucky-server.fibo.cloud:30297/management
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+server:
+  port: 8888

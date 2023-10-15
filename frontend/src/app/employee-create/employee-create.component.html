@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 class="text-center">Create User</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name"> First Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="employee.name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="surname"> Last Name</label>
+      <input type="text" class="form-control" id="surname" required [(ngModel)]="employee.surname" name="surname">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" required [(ngModel)]="employee.email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" required [(ngModel)]="employee.age" name="age">
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input type="number" class="form-control" id="salary" required [(ngModel)]="employee.salary" name="salary">
+    </div>
+
+    <button class="btn btn-success mt-2" type="submit">Submit</button>
+  </form>
+</div>
+
