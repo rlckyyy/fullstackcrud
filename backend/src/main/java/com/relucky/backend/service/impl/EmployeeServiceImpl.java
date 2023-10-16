@@ -1,5 +1,7 @@
 package com.relucky.backend.service.impl;
 
+import com.relucky.backend.dto.EmployeeDTO;
+import com.relucky.backend.mapper.EmployeeMapper;
 import com.relucky.backend.models.Employee;
 import com.relucky.backend.repository.EmployeeRepository;
 import com.relucky.backend.service.EmployeeService;
@@ -9,15 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository repository;
+    private final EmployeeMapper employeeMapper;
 
     @Override
-    public void update(Integer id, Employee model) {
+    public void update(Integer id, EmployeeDTO model) {
         Employee employee = Employee.builder()
                 .id(id)
                 .name(model.getName())
@@ -30,24 +34,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void save(Employee employee) {
-        var em = repository.findByEmail(employee.getEmail());
-
+    public void save(EmployeeDTO employeeDTO) {
+        var em = repository.findByEmail(employeeDTO.getEmail());
         if (em.isPresent()) {
             throw new IllegalArgumentException("email registered yet");
         }
-
-        repository.save(employee);
+        repository.save(employeeMapper.toModel(employeeDTO));
     }
 
     @Override
-    public Employee findById(Integer id) {
-        return repository.findById(id).orElseThrow();
+    public EmployeeDTO findById(Integer id) {
+        return employeeMapper.toDto(repository.findById(id).orElseThrow());
     }
 
     @Override
-    public List<Employee> findAll() {
-        return repository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+    public List<EmployeeDTO> findAll() {
+        return repository.findAll().stream().map(employeeMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

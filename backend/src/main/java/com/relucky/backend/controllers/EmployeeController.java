@@ -1,5 +1,7 @@
 package com.relucky.backend.controllers;
 
+import com.relucky.backend.dto.EmployeeDTO;
+import com.relucky.backend.mapper.EmployeeMapper;
 import com.relucky.backend.models.Employee;
 import com.relucky.backend.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -19,24 +21,24 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getOne(@PathVariable Integer id) {
+    public ResponseEntity<EmployeeDTO> getOne(@PathVariable Integer id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping()
     ResponseEntity<String> create(
-            @RequestBody Employee employee
+            @RequestBody EmployeeDTO employeeDTO
     ) {
-        service.save(employee);
+        service.save(employeeDTO);
         return ResponseEntity.ok("Employee saved");
     }
 
     @PutMapping("/{id}")
     ResponseEntity<String> update(
             @PathVariable Integer id,
-            @RequestBody Employee employee
+            @RequestBody EmployeeDTO employeeDTO
     ) {
-        service.update(id, employee);
+        service.update(id, employeeDTO);
         return ResponseEntity.ok("User data changed");
     }
 
