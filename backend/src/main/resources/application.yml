@@ -13,5 +13,12 @@ spring:
       ddl-auto: update
     show-sql: true
     database: postgresql
+  mvc:
+    mapping: "/**"
+    allowed:
+      credentials: true
+      origin-patterns: "http://localhost:4200/"
+      headers: "*"
+      methods: "*"
 server:
   port: 8888
