@@ -15,7 +15,6 @@ import lombok.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Integer id;
     private String name;
     private String surname;
